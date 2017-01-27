@@ -53,7 +53,23 @@ Could not find artifact jonase:kibit:jar:0.1.3
 This could be due to a typo in :dependencies or network issues.
 If you are behind a proxy, try setting the 'http_proxy' environment variable.
 
-# try again just to show the issue more obviously
+# Above we can see it fetched kibit. And yes, it's in the local repo:
+$ find /tmp/localrepo/jonase                                                                                                                                   
+/tmp/localrepo/jonase
+/tmp/localrepo/jonase/kibit
+/tmp/localrepo/jonase/kibit/0.1.3
+/tmp/localrepo/jonase/kibit/0.1.3/kibit-0.1.3.pom.sha1
+/tmp/localrepo/jonase/kibit/0.1.3/_maven.repositories
+/tmp/localrepo/jonase/kibit/0.1.3/kibit-0.1.3.pom
+/tmp/localrepo/jonase/kibit/0.1.3/kibit-0.1.3.jar.sha1
+/tmp/localrepo/jonase/kibit/0.1.3/kibit-0.1.3.jar
+
+# And it's NOT in the default repo -- as expected.
+$ find ~/.m2/repository/jonase
+find: `/home/mark/.m2/repository/jonase': No such file or directory
+
+
+#  But `lein kibit` fails to find it. Again, just to show the issue more obviously:
 $ lein kibit
 Could not find artifact jonase:kibit:jar:0.1.3
 This could be due to a typo in :dependencies or network issues.
